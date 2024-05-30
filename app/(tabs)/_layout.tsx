@@ -1,59 +1,122 @@
-import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
-
+import React, { useEffect, useState } from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import Colors from '@/constants/Colors';
-import { useColorScheme } from '@/components/useColorScheme';
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
+import TabOneScreen from '.';
+import Profile from './profile';
+import { FIREBASE_AUTH, FIREBASE_DB } from '@/FirebaseConfig';
+import MyPosts from './my_posts';
+import { collection, getDocs, onSnapshot, orderBy, query, where } from 'firebase/firestore';
+import Inbox from './inbox';
+import Chat from '@/components/Chat';
+import Post from '@/components/Post';
 
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
+const Tab = createBottomTabNavigator();
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+export default function TabLayout({ username }: { username: string }) {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [chats, setChats] = useState<Chat[]>([]);
+
+  const fetchMyPosts = async () => {
+    try {
+      const q = query(collection(FIREBASE_DB, 'posts'), orderBy('createdAt', 'desc'), where('author_id', '==', FIREBASE_AUTH.currentUser!.uid));
+      const querySnapshot = await getDocs(q);
+      const postsList: Post[] = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      })) as Post[];
+      setPosts(postsList);
+    } catch (error) {
+      console.error("Error fetching posts: ", error);
+    }
+
+    if (!username) {
+      console.error("Username is not defined.");
+      return;
+    }
+  };
+
+  const fetchChats = async () => {
+    try {
+      const q = query(
+        collection(FIREBASE_DB, 'chats'),
+        where('participants', 'array-contains', username),
+        orderBy('lastMessageTimestamp', 'desc')
+      );
+      const querySnapshot = await getDocs(q);
+
+      const chatsList: Chat[] = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      })) as Chat[];
+
+      setChats(chatsList);
+    } catch (error) {
+      console.error("Error fetching chats: ", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchMyPosts();
+    fetchChats();
+  }, []);
 
   return (
-    <Tabs
+    <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
-        headerShown: useClientOnlyValue(false, true),
-      }}>
-      <Tabs.Screen
-        name="index"
+        tabBarActiveTintColor: Colors.primary,
+        tabBarInactiveTintColor: 'gray',
+        tabBarStyle: { backgroundColor: '#222222', borderTopWidth: 0, height: 90 },
+        headerShown: false,
+      }}
+    >
+      <Tab.Screen
+        name="Explore"
+        component={TabOneScreen}
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
+          tabBarLabel: 'Explore',
+          tabBarLabelStyle: { fontFamily: 'lex-sb' },
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" color={color} size={size} />
           ),
         }}
       />
-      <Tabs.Screen
-        name="two"
+      <Tab.Screen
+        name="MyPosts"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarLabel: 'My Posts',
+          tabBarLabelStyle: { fontFamily: 'lex-sb' },
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="cash" color={color} size={size} />
+          ),
         }}
-      />
-    </Tabs>
+      >
+        {props => <MyPosts {...props} postsIn={posts} />}
+      </Tab.Screen>
+      <Tab.Screen
+        name="Inbox"
+        options={{
+          tabBarLabel: 'Inbox',
+          tabBarLabelStyle: { fontFamily: 'lex-sb' },
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome5 name="inbox" color={color} size={size} />
+          ),
+        }}
+      >
+        {props => <Inbox {...props} username={username} chatsIn={chats} />}
+      </Tab.Screen>
+      <Tab.Screen
+        name="Profile"
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarLabelStyle: { fontFamily: 'lex-sb' },
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person" color={color} size={size} />
+          ),
+        }}
+      >
+        {props => <Profile {...props} username={username} />}
+      </Tab.Screen>
+    </Tab.Navigator>
   );
 }
