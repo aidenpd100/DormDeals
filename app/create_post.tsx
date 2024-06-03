@@ -64,8 +64,7 @@ const CreatePost = ({ username }: { username: string }) => {
             }
             result = await ImagePicker.launchCameraAsync({
                 allowsEditing: true,
-                aspect: [4, 3],
-                quality: 1,
+                aspect: [4, 3]
             });
         } else {
             const { status: libraryStatus } = await ImagePicker.requestMediaLibraryPermissionsAsync()

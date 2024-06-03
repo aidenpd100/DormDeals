@@ -9,8 +9,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import ImageDisplay from '@/components/ImageDisplay'
 import { Ionicons } from '@expo/vector-icons'
 import MessageButton from '@/components/MessageButton'
+import { usePostContext } from '@/components/PostsContext'
 
 const PostPage = () => {
+    const { myPostsUpdated, setMyPostsUpdated } = usePostContext()
     const { id } = useLocalSearchParams()
     const [loading, setLoading] = useState(false)
     const [post, setPost] = useState<Post | undefined>(undefined)
@@ -35,6 +37,12 @@ const PostPage = () => {
     useEffect(() => {
         fetchPost();
     }, []);
+
+    useEffect(() => {
+        if (myPostsUpdated) {
+            fetchPost().then(() => setMyPostsUpdated(false));
+        }
+    }, [myPostsUpdated]);
 
     const formatDate = (timestamp: Timestamp) => {
         const date = timestamp.toDate();
@@ -65,7 +73,12 @@ const PostPage = () => {
                         <Text style={{ color: '#fff', fontSize: 23, fontFamily: 'lex-xlight' }}>Asking price: ${post.price}</Text>
                         <Text style={{ color: '#fff', fontSize: 23, fontFamily: 'lex-light', margin: 10 }}>{post.description}</Text>
                         <ImageDisplay postID={id!.toString()} />
-                        {FIREBASE_AUTH.currentUser?.uid != post.author_id ? <MessageButton toUsername={post.author_username} /> : null}
+                        {FIREBASE_AUTH.currentUser?.uid != post.author_id ?
+                            <MessageButton toUsername={post.author_username} />
+                            : <TouchableOpacity style={[styles.button, { marginTop: 20 }]} activeOpacity={0.75} onPress={() => router.push(`/edit_post/${post.id}`)}>
+                                <Text style={{ fontFamily: 'lex-reg', fontSize: 17 }}>Edit Post</Text>
+                            </TouchableOpacity>
+                        }
 
                     </>
                 ) : (

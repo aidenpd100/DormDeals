@@ -17,6 +17,7 @@ import { PostProvider } from '@/components/PostsContext';
 import { Text } from 'react-native';
 import NewChatPage from './chat/new';
 import ChatPage from './chat/[id]';
+import EditPost from './edit_post/[id]';
 
 // @ts-ignore
 Text.defaultProps = { ...(Text.defaultProps || {}), allowFontScaling: false }
@@ -106,6 +107,7 @@ function RootLayoutNav() {
       <Stack.Screen name='chat/new' options={{ headerShown: false }}>
         {props => <NewChatPage {...props} username={username} />}
       </Stack.Screen>
+      <Stack.Screen name='edit_post/[id]' component={EditPost} options={{ headerShown: false }} />
     </Stack.Navigator>
 
   );
