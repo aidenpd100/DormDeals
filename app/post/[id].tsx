@@ -76,7 +76,7 @@ const PostPage = () => {
                         {FIREBASE_AUTH.currentUser?.uid != post.author_id ?
                             <MessageButton toUsername={post.author_username} />
                             : <TouchableOpacity style={[styles.button, { marginTop: 20 }]} activeOpacity={0.75} onPress={() => router.push(`/edit_post/${post.id}`)}>
-                                <Text style={{ fontFamily: 'lex-reg', fontSize: 17 }}>Edit Post</Text>
+                                <Text style={{ color: '#fff', fontFamily: 'lex-reg', fontSize: 17 }}>Edit Post</Text>
                             </TouchableOpacity>
                         }
 

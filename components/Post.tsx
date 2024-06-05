@@ -50,7 +50,7 @@ const Post = ({ myPosts, id, title, price, createdAt }: { myPosts: boolean, id: 
             return 'Just now'
         }
         if (diffInMinutes < 60) {
-            return `${diffInMinutes} min${diffInHours !== 1 ? 's' : ''} ago`;
+            return `${diffInMinutes} min${diffInMinutes !== 1 ? 's' : ''} ago`;
         }
         if (diffInHours < 24) {
             return `${diffInHours} hour${diffInHours !== 1 ? 's' : ''} ago`;
