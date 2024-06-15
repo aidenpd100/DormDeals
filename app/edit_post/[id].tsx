@@ -41,10 +41,19 @@ const EditPost = () => {
         fetchPost();
     }, []);
 
+    useEffect(() => {
+        setTitle(post ? post.title : '')
+        setDescription(post ? post.description : '')
+        setPrice(post ? post.price : '')
+    }, [post])
+
     const updatePost = async () => {
         try {
             if (title == '') {
                 throw Error('No title provided')
+            }
+            if (title == post!.title && description == post!.description && price == post!.price) {
+                throw Error('No changes were made')
             }
 
             setUpdating(true)
@@ -69,9 +78,9 @@ const EditPost = () => {
                 {loading ? <ActivityIndicator /> :
                     <>
                         <KeyboardAvoidingView>
-                            <TextInput style={styles.input} placeholder='Title' placeholderTextColor='#4a4a4a' autoCapitalize='none' onChangeText={(text) => setTitle(text)}>{post?.title}</TextInput>
-                            <TextInput multiline={true} style={[styles.input, { height: 100 }]} placeholder='Description' placeholderTextColor='#4a4a4a' autoCapitalize='none' onChangeText={(text) => setDescription(text)} >{post?.description}</TextInput>
-                            <TextInput style={styles.input} placeholder='Price' placeholderTextColor='#4a4a4a' keyboardType={'numeric'} onChangeText={(price) => setPrice(price)} >{post?.price}</TextInput>
+                            <TextInput style={styles.input} placeholder='Title' placeholderTextColor='#4a4a4a' autoCapitalize='none' onChangeText={(text) => setTitle(text)}>{title}</TextInput>
+                            <TextInput multiline={true} style={[styles.input, { height: 100 }]} placeholder='Description' placeholderTextColor='#4a4a4a' autoCapitalize='none' onChangeText={(text) => setDescription(text)} >{description}</TextInput>
+                            <TextInput style={styles.input} placeholder='Price' placeholderTextColor='#4a4a4a' keyboardType={'numeric'} onChangeText={(price) => setPrice(price)} >{price}</TextInput>
                         </KeyboardAvoidingView>
                         <>
                             <TouchableOpacity onPress={updatePost} style={styles.button} activeOpacity={0.75}>
