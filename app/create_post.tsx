@@ -8,7 +8,7 @@ import { router } from 'expo-router'
 import { usePostContext } from '@/components/PostsContext'
 import * as ImagePicker from 'expo-image-picker';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
-import { Ionicons } from '@expo/vector-icons'
+import { manipulateAsync } from 'expo-image-manipulator';
 import BackArrow from '@/components/BackArrow'
 
 const CreatePost = ({ username }: { username: string }) => {
@@ -64,7 +64,7 @@ const CreatePost = ({ username }: { username: string }) => {
             }
             result = await ImagePicker.launchCameraAsync({
                 allowsEditing: true,
-                aspect: [4, 3]
+                aspect: [4, 3],
             });
         } else {
             const { status: libraryStatus } = await ImagePicker.requestMediaLibraryPermissionsAsync()
@@ -76,12 +76,16 @@ const CreatePost = ({ username }: { username: string }) => {
                 mediaTypes: ImagePicker.MediaTypeOptions.All,
                 allowsEditing: true,
                 aspect: [4, 3],
-                quality: 1,
             });
         }
 
         if (!result.canceled) {
-            setImage(result.assets[0].uri);
+            const manipulateResult = await manipulateAsync(
+                result.assets[0].uri,
+                [],
+                { compress: 0.1 } // from 0 to 1 "1 for best quality"
+            );
+            setImage(manipulateResult.uri);
         }
     }
 
