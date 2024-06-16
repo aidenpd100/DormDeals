@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { styles } from '@/constants/Styles'
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { FIREBASE_APP, FIREBASE_AUTH, FIREBASE_DB, FIREBASE_STORAGE } from '@/FirebaseConfig'
-import { User } from 'firebase/auth'
+import { User, deleteUser } from 'firebase/auth'
 import { Firestore, collection, deleteDoc, doc, getDoc, getDocFromServer, getDocs, getFirestore, query, where } from 'firebase/firestore'
 import Header from '@/components/Header'
 import { ref } from 'firebase/storage'
@@ -35,9 +35,11 @@ const Profile = ({ username }: { username: string }) => {
         try {
             setLoadingDelete(true)
             const deletedUid = FIREBASE_AUTH.currentUser!.uid
+            const deletedUser = FIREBASE_AUTH.currentUser!
 
             signOut(false)
             await deleteDoc(doc(FIREBASE_DB, 'users', deletedUid));
+            deleteUser(deletedUser)
 
             const q = query(collection(FIREBASE_DB, 'posts'), where('author_id', '==', deletedUid));
             const querySnapshot = await getDocs(q);
