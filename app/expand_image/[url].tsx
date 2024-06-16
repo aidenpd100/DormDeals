@@ -1,11 +1,10 @@
-import { View, Text, Image } from 'react-native'
-import React, { useCallback, useRef } from 'react'
-import { styles } from '@/constants/Styles'
+import React from 'react'
+import { View, Image, Dimensions } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import BackX from '@/components/BackX'
 import { useLocalSearchParams } from 'expo-router'
-import { Dimensions } from 'react-native';
-import ImageZoom from 'react-native-image-pan-zoom';
+import ImageZoom from 'react-native-image-pan-zoom'
+import BackX from '@/components/BackX'
+import { styles } from '@/constants/Styles'
 
 const ExpandImage = () => {
     const { url } = useLocalSearchParams()
