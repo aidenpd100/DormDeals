@@ -18,6 +18,7 @@ import { Text } from 'react-native';
 import NewChatPage from './chat/new';
 import ChatPage from './chat/[id]';
 import EditPost from './edit_post/[id]';
+import ExpandImage from './expand_image/[url]';
 
 // @ts-ignore
 Text.defaultProps = { ...(Text.defaultProps || {}), allowFontScaling: false }
@@ -108,7 +109,7 @@ function RootLayoutNav() {
         {props => <NewChatPage {...props} username={username} />}
       </Stack.Screen>
       <Stack.Screen name='edit_post/[id]' component={EditPost} options={{ headerShown: false }} />
+      <Stack.Screen name='expand_image/[url]' component={ExpandImage} options={{ animation: 'fade', animationDuration: 100, headerShown: false }} />
     </Stack.Navigator>
-
   );
 }

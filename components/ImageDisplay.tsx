@@ -1,8 +1,9 @@
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
-import { Image, View, ActivityIndicator, StyleSheet, Text } from 'react-native';
+import { Image, View, ActivityIndicator, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { FIREBASE_STORAGE } from '@/FirebaseConfig';
 import Colors from '@/constants/Colors';
+import { router } from 'expo-router';
 
 interface ImageDisplayProps {
     postID: string;
@@ -30,18 +31,16 @@ const ImageDisplay: React.FC<ImageDisplayProps> = ({ postID }) => {
         fetchImageUrl();
     }, [postID]);
 
-    if (loading) {
-        return <ActivityIndicator />
-    }
-
     if (error) {
         return (<Text>{error}</Text>)
     }
 
     return (
         <View>
-            {imageUrl && <Image source={{ uri: imageUrl }} style={{ width: 300, height: 300, resizeMode: 'cover', marginTop: 30, borderColor: Colors.dark, borderWidth: 2 }} />}
-        </View>
+            <TouchableOpacity activeOpacity={0.75} onPress={() => router.push(`expand_image/${encodeURIComponent(imageUrl!)}`)}>
+                {imageUrl && <Image source={{ uri: imageUrl }} style={{ width: 300, height: 300, resizeMode: 'cover', marginTop: 30, borderColor: Colors.dark, borderWidth: 2 }} />}
+            </TouchableOpacity>
+        </View >
     );
 };
 
