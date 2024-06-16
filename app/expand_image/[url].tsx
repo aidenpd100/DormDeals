@@ -15,11 +15,13 @@ const ExpandImage = () => {
             <BackX />
             <View style={{ height: '100%' }}>
                 <ImageZoom cropWidth={Dimensions.get('window').width}
-                    cropHeight={Dimensions.get('window').height - 80}
+                    cropHeight={Dimensions.get('window').height - 100}
                     imageWidth={screenWidth}
                     imageHeight={screenWidth}
                     minScale={1}
-                    maxScale={2}>
+                    maxScale={3}
+                    style={{ marginTop: 15 }}
+                >
                     <Image source={{ uri: url?.toString() }} style={{ width: screenWidth, height: screenWidth }} />
                 </ImageZoom>
             </View>
