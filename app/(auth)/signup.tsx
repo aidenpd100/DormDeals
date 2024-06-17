@@ -33,6 +33,9 @@ const SignUp = () => {
             if (username.indexOf(' ') >= 0) {
                 throw Error('Usernames cannot contain spaces')
             }
+            if (password.indexOf(' ') >= 0) {
+                throw Error('Passwords cannot contain spaces')
+            }
 
             const response = await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password).then(async (registeredUser) => {
                 await setDoc(doc(collection(FIREBASE_DB, 'users'), registeredUser.user.uid), {
