@@ -7,6 +7,7 @@ import { User, deleteUser } from 'firebase/auth'
 import { Firestore, collection, deleteDoc, doc, getDoc, getDocFromServer, getDocs, getFirestore, query, where } from 'firebase/firestore'
 import Header from '@/components/Header'
 import { ref } from 'firebase/storage'
+import { router } from 'expo-router'
 
 const Profile = ({ username }: { username: string }) => {
 
@@ -62,6 +63,11 @@ const Profile = ({ username }: { username: string }) => {
             <TouchableOpacity style={[styles.button]} onPress={() => signOut(true)} activeOpacity={0.75}>
                 {loadingOut ? <ActivityIndicator /> :
                     <Text style={{ fontFamily: 'lex-sb', fontSize: 17 }}>Sign out</Text>
+                }
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.button]} onPress={() => router.push('change_password')} activeOpacity={0.75}>
+                {loadingOut ? <ActivityIndicator /> :
+                    <Text style={{ fontFamily: 'lex-sb', fontSize: 17 }}>Change password</Text>
                 }
             </TouchableOpacity>
             <TouchableOpacity style={[styles.button, { backgroundColor: '#af0000' }]} onPress={deletePrompt} activeOpacity={0.75}>

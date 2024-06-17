@@ -19,6 +19,7 @@ import NewChatPage from './chat/new';
 import ChatPage from './chat/[id]';
 import EditPost from './edit_post/[id]';
 import ExpandImage from './expand_image/[url]';
+import ChangePassword from './change_password';
 
 // @ts-ignore
 Text.defaultProps = { ...(Text.defaultProps || {}), allowFontScaling: false }
@@ -110,6 +111,7 @@ function RootLayoutNav() {
       </Stack.Screen>
       <Stack.Screen name='edit_post/[id]' component={EditPost} options={{ headerShown: false }} />
       <Stack.Screen name='expand_image/[url]' component={ExpandImage} options={{ animation: 'fade', animationDuration: 100, headerShown: false }} />
+      <Stack.Screen name='change_password' component={ChangePassword} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }
