@@ -8,6 +8,5 @@
   <img src="https://github.com/user-attachments/assets/179b06a3-1a6b-4480-b175-a98c6823cdaf" width=190/>
   <img src="https://github.com/user-attachments/assets/3fd3b34c-00a3-4e30-8bd1-9c339a384156" width=190/>
   <img src="https://github.com/user-attachments/assets/2f0059d7-95d7-4c6d-94ac-4202a59d92d5" width=190/>
-  <img src="https://github.com/user-attachments/assets/c35d9a73-ff0c-401e-b1d4-d3e027ec43f2" width=190/>
 </p>
 
