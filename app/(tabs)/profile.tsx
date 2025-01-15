@@ -1,12 +1,11 @@
-import { View, Text, Button, TouchableOpacity, ActivityIndicator, Alert } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, TouchableOpacity, ActivityIndicator, Alert } from 'react-native'
+import React, { useState } from 'react'
 import { styles } from '@/constants/Styles'
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
-import { FIREBASE_APP, FIREBASE_AUTH, FIREBASE_DB, FIREBASE_STORAGE } from '@/FirebaseConfig'
-import { User, deleteUser } from 'firebase/auth'
-import { Firestore, collection, deleteDoc, doc, getDoc, getDocFromServer, getDocs, getFirestore, query, where } from 'firebase/firestore'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { FIREBASE_AUTH, FIREBASE_DB } from '@/FirebaseConfig'
+import { deleteUser } from 'firebase/auth'
+import { collection, deleteDoc, doc, getDocs, query, where } from 'firebase/firestore'
 import Header from '@/components/Header'
-import { ref } from 'firebase/storage'
 import { router } from 'expo-router'
 
 const Profile = ({ username }: { username: string }) => {

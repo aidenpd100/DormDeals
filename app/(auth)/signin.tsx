@@ -1,15 +1,12 @@
-import { View, Text, Modal, Image, TextInput, Button, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { View, Text, Image, TextInput, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { styles } from '@/constants/Styles'
 import Images from '@/constants/images'
-import { FIREBASE_AUTH, FIREBASE_DB } from '../../FirebaseConfig'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
-import { updateProfile } from 'firebase/auth'
-import { addDoc, collection, serverTimestamp, setDoc, doc } from 'firebase/firestore'
+import { FIREBASE_AUTH } from '../../FirebaseConfig'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import { Link } from 'expo-router'
-import Colors from '@/constants/Colors'
-import { FontAwesome5, Ionicons } from '@expo/vector-icons'
+import { FontAwesome5 } from '@expo/vector-icons'
 
 const SignIn = () => {
     const [email, setEmail] = useState('')

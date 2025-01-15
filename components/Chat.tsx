@@ -4,8 +4,6 @@ import { router } from 'expo-router'
 import { styles } from '@/constants/Styles'
 import { Timestamp, deleteDoc, doc } from 'firebase/firestore';
 import { FIREBASE_DB } from '@/FirebaseConfig';
-import { usePostContext } from './PostsContext';
-import { FontAwesome5 } from '@expo/vector-icons';
 
 interface Chat {
     id: string;

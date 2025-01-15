@@ -6,7 +6,7 @@ import TabOneScreen from '.';
 import Profile from './profile';
 import { FIREBASE_AUTH, FIREBASE_DB } from '@/FirebaseConfig';
 import MyPosts from './my_posts';
-import { collection, getDocs, onSnapshot, orderBy, query, where } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
 import Inbox from './inbox';
 import Chat from '@/components/Chat';
 import Post from '@/components/Post';

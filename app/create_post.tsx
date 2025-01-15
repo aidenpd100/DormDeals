@@ -1,9 +1,9 @@
 import { View, Text, KeyboardAvoidingView, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity, ActivityIndicator, Alert, Image } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { styles } from '@/constants/Styles'
-import { collection, doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore'
-import { FIREBASE_APP, FIREBASE_AUTH, FIREBASE_DB, FIREBASE_STORAGE } from '@/FirebaseConfig'
+import { collection, doc, serverTimestamp, setDoc } from 'firebase/firestore'
+import { FIREBASE_AUTH, FIREBASE_DB, FIREBASE_STORAGE } from '@/FirebaseConfig'
 import { router } from 'expo-router'
 import { usePostContext } from '@/components/PostsContext'
 import * as ImagePicker from 'expo-image-picker';

@@ -1,10 +1,10 @@
-import { FIREBASE_APP, FIREBASE_AUTH, FIREBASE_DB } from '@/FirebaseConfig';
+import { FIREBASE_DB } from '@/FirebaseConfig';
 import Header from '@/components/Header';
 import Post from '@/components/Post';
 import { styles } from '@/constants/Styles';
-import { Timestamp, collection, getDoc, getDocs, orderBy, query } from 'firebase/firestore';
+import { Timestamp, collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, RefreshControl, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { usePostContext } from '@/components/PostsContext';
 

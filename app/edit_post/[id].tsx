@@ -5,7 +5,7 @@ import { styles } from '@/constants/Styles'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import BackArrow from '@/components/BackArrow'
 import { router, useLocalSearchParams } from 'expo-router'
-import { collection, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { FIREBASE_DB } from '@/FirebaseConfig'
 import { usePostContext } from '@/components/PostsContext'
 

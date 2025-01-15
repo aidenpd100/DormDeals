@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, FlatList, TouchableOpacity } from 'react-native';
-import { collection, addDoc, serverTimestamp, getDoc, doc, query, where, getDocs } from 'firebase/firestore';
+import React from 'react';
+import { Text, TouchableOpacity } from 'react-native';
+import { collection, getDoc, doc, query, where, getDocs } from 'firebase/firestore';
 import { FIREBASE_DB, FIREBASE_AUTH } from '@/FirebaseConfig';
-import { useNavigation } from '@react-navigation/native';
 import { router } from 'expo-router';
 import { styles } from '@/constants/Styles';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import BackArrow from '@/components/BackArrow';
-import { usePostContext } from './PostsContext';
 
 const MessageButton = ({ toUsername }: { toUsername: string }) => {
 

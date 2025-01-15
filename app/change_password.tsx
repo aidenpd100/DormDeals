@@ -1,12 +1,11 @@
-import { View, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, ActivityIndicator, Alert } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { styles } from '@/constants/Styles'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Header from '@/components/Header';
-import { FIREBASE_AUTH, FIREBASE_DB } from '@/FirebaseConfig'
-import { Firestore, collection, doc, getDoc, query, where } from 'firebase/firestore'
-import { EmailAuthProvider, reauthenticateWithCredential, signOut, updatePassword } from 'firebase/auth'
+import { FIREBASE_AUTH } from '@/FirebaseConfig'
+import { EmailAuthProvider, reauthenticateWithCredential, updatePassword } from 'firebase/auth'
 import { router } from 'expo-router'
 
 const ChangePassword = () => {

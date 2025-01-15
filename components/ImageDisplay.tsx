@@ -1,5 +1,5 @@
-import { getStorage, ref, getDownloadURL } from 'firebase/storage';
-import { Image, View, ActivityIndicator, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { ref, getDownloadURL } from 'firebase/storage';
+import { Image, View, Text, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { FIREBASE_STORAGE } from '@/FirebaseConfig';
 import Colors from '@/constants/Colors';

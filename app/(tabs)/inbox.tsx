@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, TextInput, ActivityIndicator, RefreshControl } from 'react-native';
+import { View, FlatList, ActivityIndicator, RefreshControl } from 'react-native';
 import { collection, query, where, onSnapshot, orderBy, Timestamp, getDocs } from 'firebase/firestore';
-import { FIREBASE_DB, FIREBASE_AUTH } from '@/FirebaseConfig';
-import { useNavigation } from '@react-navigation/native';
-import { router } from 'expo-router';
+import { FIREBASE_DB } from '@/FirebaseConfig';
 import { styles } from '@/constants/Styles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Header from '@/components/Header';
 import Chat from '@/components/Chat';
-import { usePostContext } from '@/components/PostsContext';
 
 const Inbox = ({ username, chatsIn }: { username: string, chatsIn: Chat[] }) => {
     const [chats, setChats] = useState<Chat[]>(chatsIn);

@@ -3,11 +3,9 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useCallback, useEffect, useState } from 'react';
 import 'react-native-reanimated';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Login from './(auth)/signin';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH, FIREBASE_DB } from '@/FirebaseConfig';
 import TabLayout from './(tabs)/_layout';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import SignIn from './(auth)/signin';
 import SignUp from './(auth)/signup';
 import CreatePost from './create_post';
@@ -20,6 +18,7 @@ import ChatPage from './chat/[id]';
 import EditPost from './edit_post/[id]';
 import ExpandImage from './expand_image/[url]';
 import ChangePassword from './change_password';
+import React from 'react';
 
 // @ts-ignore
 Text.defaultProps = { ...(Text.defaultProps || {}), allowFontScaling: false }

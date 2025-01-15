@@ -1,7 +1,6 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { Timestamp } from 'firebase/firestore';
-import { FIREBASE_AUTH } from '@/FirebaseConfig';
 import { styles } from '@/constants/Styles';
 
 interface Message {

@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import Colors from "./Colors";
-import { useFonts } from "expo-font";
 
 export const styles = StyleSheet.create({
     container: {
